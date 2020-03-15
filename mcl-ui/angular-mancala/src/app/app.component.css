@@ -1,0 +1,14 @@
+nav {
+    margin: 10px auto;
+    width: 800px;
+    text-align: center;
+}
+nav a {
+    padding: 5px;
+    color: blueviolet;
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bold;
+}

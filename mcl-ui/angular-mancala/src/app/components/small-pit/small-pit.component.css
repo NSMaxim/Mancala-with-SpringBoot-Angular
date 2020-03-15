@@ -1,0 +1,28 @@
+.smallPit {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 35px 6.5px;
+
+  line-height: 80px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 32px;
+
+  cursor: pointer;
+  background-color: white;
+}
+
+.player1SmallPit {
+  float: right;
+}
+
+.player2SmallPit {
+  float: left;
+}
+
+.disabled {
+    cursor: default;
+    background-color: lightgray;
+}

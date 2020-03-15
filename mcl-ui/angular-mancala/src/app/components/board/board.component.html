@@ -1,0 +1,42 @@
+<div *ngIf="loading" id="board">
+        Loading...
+</div>
+
+<div *ngIf="!loading" id="board">
+
+        <div id="endGameBanner" *ngIf="gameState.gameEnded">
+                Winner is Player{{ gameState.winner }} with {{ gameState.winner === 1 ? gameState.mancala.player1.largePit : gameState.mancala.player2.largePit}} pebbles.
+                <br/>
+                Plyer1 has {{ gameState.mancala.player1.largePit }} pebbles.
+                <br/>
+                Plyer2 has {{ gameState.mancala.player2.largePit }} pebbles.
+                
+                <p id="clickAble" (click)="reload()">Play Another</p>
+        </div>
+
+        <div *ngIf="!gameState.gameEnded">
+
+                <div class="playerTitle" id="player1Title">Player 1</div>
+        
+                <app-large-pit 
+                        [pit]="createPit(gameState.mancala.player1.largePit, -1, gameState.mancala.player1)">
+                </app-large-pit>
+                <app-large-pit 
+                        [pit]="createPit(gameState.mancala.player2.largePit, -1, gameState.mancala.player2)">
+                </app-large-pit>
+        
+        
+                <app-small-pit 
+                        *ngFor="let pebblesCount of gameState.mancala.player1.smallPits; index as i" 
+                        [pit]="createPit(pebblesCount, i+1, gameState.mancala.player1)"
+                        (movePebbles)="onPebblesMove($event)">
+                </app-small-pit>
+                <app-small-pit 
+                        *ngFor="let pebblesCount of gameState.mancala.player2.smallPits; index as i" 
+                        [pit]="createPit(pebblesCount, i+1, gameState.mancala.player2)"
+                        (movePebbles)="onPebblesMove($event)">
+                </app-small-pit>
+        
+                <div class="playerTitle" id="player2Title">Player 2</div>
+        </div>
+</div>

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    environment:
+      - CAPTURED_TO_LARGE_PIT=true
+    build: .
+    ports:
+      - "8080:8443"

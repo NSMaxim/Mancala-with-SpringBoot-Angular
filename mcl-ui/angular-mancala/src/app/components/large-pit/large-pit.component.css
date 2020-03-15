@@ -1,0 +1,26 @@
+.largePit {
+  border: 1px solid black;
+  border-radius: 50%;
+
+  height: 300px;
+  width: 120px;
+
+  line-height: 300px;
+  text-align: center;
+  font-size: 64px;
+
+  background-color: white;
+}
+
+.player1LargePit {
+  float: left;
+}
+
+.player2LargePit {
+  float: right;
+}
+
+.disabled {
+    cursor: default;
+    background-color: lightgray;
+}

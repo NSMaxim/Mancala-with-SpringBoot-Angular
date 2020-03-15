@@ -1,0 +1,41 @@
+#board {
+  margin: 0 auto;
+  width: 800px;
+  height: 410px;
+  text-align: center;
+  background-color: khaki;
+}
+
+#player1Board,
+#player2Noard {
+  position: absolute;
+  width: 800px;
+  height: 300px;
+}
+
+.playerTitle {
+    width: 800px;
+    line-height: 25px;
+    font-weight: bold;
+}
+
+#player1Title {
+    text-align: left;
+    padding: 15px 0 10px 35px;
+}
+
+#player2Title {
+    text-align: right;
+    padding: 315px 25px 0 0;
+}
+
+#endGameBanner {
+    padding: 50px 0;
+    line-height: 35px;
+}
+
+#clickAble {
+    cursor: pointer;
+    color: indigo;
+    font-weight: bold;
+}
