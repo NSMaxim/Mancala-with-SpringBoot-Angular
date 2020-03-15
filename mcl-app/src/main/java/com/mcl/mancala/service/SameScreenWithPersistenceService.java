@@ -34,18 +34,23 @@ public class SameScreenWithPersistenceService {
     private boolean whenCapturedAddToLargePit;
 
     public GameState continueGame(long id) {
+        if (id == -1) {
+            return newGame();
+        }
+
         log.info(String.format("Trying to continue game with id %o ", id));
         Optional<MancalaEntity> repoMancalaOptional = mancalaRepository.findById(id);
         return repoMancalaOptional.map(this::getExistingGameState).orElseGet(this::newGame);
     }
 
-    public GameState newGame() {
+    private GameState newGame() {
         Mechanics mechanics = new Mechanics();
         mechanics.start();
 
         GameState newGameState = getUpdateGameState(
-                new PlayerState(mechanics.getMancala().getPlayer1()),
-                new PlayerState(mechanics.getMancala().getPlayer2()));
+                new MancalaEntity(
+                        new PlayerState(mechanics.getMancala().getPlayer1()),
+                        new PlayerState(mechanics.getMancala().getPlayer2())));
 
         log.info(String.format("Started new game with id %o ", newGameState.getId()));
         return newGameState;
@@ -64,21 +69,19 @@ public class SameScreenWithPersistenceService {
             mancalaEntityFromRepo.getPlayer2().updatePlayerState(mechanics.getMancala().getPlayer2());
 
             log.info(String.format("Updating game with id %o ", mancalaEntityFromRepo.getId()));
-            return getUpdateGameState(mancalaEntityFromRepo.getPlayer1(), mancalaEntityFromRepo.getPlayer2());
+            return getUpdateGameState(mancalaEntityFromRepo);
         } else {
             //TODO: this shouldn't really happen in real life
             return newGame();
         }
     }
 
-    private GameState getUpdateGameState(PlayerState player1, PlayerState player2) {
-        log.info(String.format("Saving player with id %o ", player1.getId()));
-        PlayerState player1State = playerStateRepository.save(player1);
+    private GameState getUpdateGameState(MancalaEntity mancalaEntity) {
+        log.info(String.format("Saving player with id %o ", mancalaEntity.getPlayer1().getId()));
+        playerStateRepository.save(mancalaEntity.getPlayer1());
 
-        log.info(String.format("Saving player with id %o ", player2.getId()));
-        PlayerState player2State = playerStateRepository.save(player2);
-
-        MancalaEntity mancalaEntity = new MancalaEntity(player1State, player2State);
+        log.info(String.format("Saving player with id %o ", mancalaEntity.getPlayer2().getId()));
+        playerStateRepository.save(mancalaEntity.getPlayer2());
 
         MancalaEntity repoMancala = mancalaRepository.save(mancalaEntity);
         log.info(String.format("Saving game with id %o ", repoMancala.getId()));

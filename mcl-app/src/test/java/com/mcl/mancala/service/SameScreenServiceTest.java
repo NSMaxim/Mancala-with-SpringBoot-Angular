@@ -22,13 +22,26 @@ public class SameScreenServiceTest {
     }
 
     @Test
-    public void makeMove() {
-        PlayerMove playerMove = new PlayerMove(new Mechanics().start(), 1, 5);
+    public void gameOver() {
+        Mancala mancala = new Mechanics().start();
+        mancala.getPlayer1().setSmallPits(new int[]{0,0,0,0,0,1});
+        PlayerMove playerMove = new PlayerMove(mancala, 1, 6);
 
-        Mancala resultingMancalaState = new Mechanics().start();
-        Mechanics gameMechanics = new Mechanics(resultingMancalaState, false);
+        Mechanics gameMechanics = new Mechanics(mancala, false);
+        gameMechanics.playerMove(1, 6);
+        GameState resultingGameState = new GameState(1L, mancala, gameMechanics.isGameOver(), gameMechanics.whichPlayerWon());
+
+        assertEquals(resultingGameState, sameScreenService.makeMove(playerMove));
+    }
+
+    @Test
+    public void makeMove() {
+        Mancala mancala = new Mechanics().start();
+        PlayerMove playerMove = new PlayerMove(mancala, 1, 5);
+
+        Mechanics gameMechanics = new Mechanics(mancala, false);
         gameMechanics.playerMove(1, 5);
-        GameState resultingGameState = new GameState(1L, resultingMancalaState, gameMechanics.isGameOver(), gameMechanics.whichPlayerWon());
+        GameState resultingGameState = new GameState(1L, gameMechanics.getMancala(), gameMechanics.isGameOver(), gameMechanics.whichPlayerWon());
 
         assertEquals(resultingGameState, sameScreenService.makeMove(playerMove));
     }

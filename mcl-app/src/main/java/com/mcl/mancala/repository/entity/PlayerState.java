@@ -1,10 +1,7 @@
 package com.mcl.mancala.repository.entity;
 
 import com.mcl.mancala.beans.Player;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Entity;
@@ -20,11 +17,12 @@ import java.util.stream.Collectors;
  * @author Maxim N
  * */
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@EqualsAndHashCode
 public class PlayerState {
 
     public static final String SEPARATOR = ";";

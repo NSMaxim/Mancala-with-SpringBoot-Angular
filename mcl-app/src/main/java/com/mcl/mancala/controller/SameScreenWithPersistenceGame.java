@@ -26,11 +26,7 @@ public class SameScreenWithPersistenceGame {
     @ResponseBody
     @GetMapping("/continue")
     public GameState continueGame(long id) {
-        if (id == -1) {
-            return sameScreenWithPersistenceService.newGame();
-        } else {
-            return sameScreenWithPersistenceService.continueGame(id);
-        }
+        return sameScreenWithPersistenceService.continueGame(id);
     }
 
     @ResponseBody
