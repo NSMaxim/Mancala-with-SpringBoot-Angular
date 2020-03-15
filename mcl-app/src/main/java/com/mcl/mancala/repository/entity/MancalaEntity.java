@@ -1,9 +1,6 @@
 package com.mcl.mancala.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,12 +10,12 @@ import javax.persistence.*;
  * @author Maxim N
  * */
 
-
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@EqualsAndHashCode
 public class MancalaEntity {
 
     @Id
