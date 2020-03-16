@@ -31,7 +31,7 @@ export class BoardWithPersistenceComponent implements OnInit {
 
   onPebblesMove(pit: Pit) {
     this.gameService
-      .movePebbles(this.id, this.gameState.mancala, pit.playerId, pit.position)
+      .movePebbles(this.id, pit.playerId, pit.position)
       .subscribe(recievedGameState => {
         this.gameState = recievedGameState;
       });

@@ -2,18 +2,18 @@ import { Mancala } from "./Mancala";
 
 export class PlayerMove {
   constructor(
-    mancala: Mancala,
+    id: number,
     playerToMove: number,
     smallPitToMoveFrom: number,
-    id?: number
+    mancala?: Mancala
   ) {
-    this.mancala = mancala;
+    this.id = id;
     this.playerToMove = playerToMove;
     this.smallPitToMoveFrom = smallPitToMoveFrom;
-    this.id = id;
+    this.mancala = mancala;
   }
   id: number;
-  mancala: Mancala;
   playerToMove: number;
   smallPitToMoveFrom: number;
+  mancala: Mancala;
 }

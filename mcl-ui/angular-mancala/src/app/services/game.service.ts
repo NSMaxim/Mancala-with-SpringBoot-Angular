@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { GameState } from "../models/GameState";
 import { PlayerMove } from "../models/PlayerMove";
 import { Mancala } from "../models/Mancala";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,7 @@ export class GameService {
   constructor(private http: HttpClient) {}
 
   getNewGame(): Observable<GameState> {
-    return this.http.get<GameState>('/new-game');
+    return this.http.get<GameState>(environment.apiUrl + '/new-game');
   }
 
   movePebbles(
@@ -21,8 +22,8 @@ export class GameService {
     smallPitPosition: number
   ): Observable<GameState> {
     return this.http.post<GameState>(
-      '/make-move',
-      new PlayerMove(mancala, playerToMove, smallPitPosition)
+      environment.apiUrl + '/make-move',
+      new PlayerMove(-1, playerToMove, smallPitPosition, mancala)
     );
   }
 }
